@@ -1,20 +1,11 @@
 version: v1.0
-name: "\U0001F3AF Simple CI Pipeline"
+name: Pipeline 2
 agent:
   machine:
-    type: f1-standard-2
-    os_image: ubuntu2404
-fail_fast:
-  stop:
-    when: branch != 'main'
-auto_cancel:
-  running:
-    when: branch != 'main'
-  queued:
-    when: branch = 'main'
+    type: ''
+    os_image: ''
 blocks:
   - name: "\U0001F9EA Docker"
-    dependencies: []
     task:
       jobs:
         - name: Create and push
@@ -28,11 +19,11 @@ blocks:
       secrets:
         - name: DOCKER_TOKEN_Mnev
   - name: "\U0001F680 Kubernetes"
-    dependencies:
-      - "\U0001F9EA Docker"
     task:
+      secrets:
+        - name: kubeconfig
       jobs:
-        - name: Stable
+        - name: Canary
           commands:
             - checkout
             - cd 3-canary-deployment
@@ -41,8 +32,3 @@ blocks:
             - kubectl apply -f service.yml
             - kubectl rollout status deployment/flask-app-stable
             - kubectl get svc flask-app
-      secrets:
-        - name: kubeconfig
-promotions:
-  - name: Canary
-    pipeline_file: pipeline_2.yml

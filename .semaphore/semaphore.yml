@@ -32,14 +32,14 @@ blocks:
       - "\U0001F9EA Docker"
     task:
       jobs:
-        - name: Deploy
+        - name: Canary
           commands:
             - checkout
-            - cd 1-deployment
+            - cd 3-canary-deployment
             - kubectl config set-context --current --namespace=g4
-            - kubectl apply -f deployment.yml
-            - kubectl apply -f service.yml
-            - kubectl rollout status deployment/flask-app
+            - kubectl apply -f deployment-canary.yml
+            - kubectl apply -f service-canary.yml
+            - kubectl rollout status deployment/flask-app-canary
             - kubectl get svc flask-app
       secrets:
         - name: kubeconfig

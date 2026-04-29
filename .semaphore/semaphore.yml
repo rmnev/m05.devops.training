@@ -44,7 +44,6 @@ blocks:
             - kubectl apply -f deployment-blue.yml
             - kubectl apply -f service-blue.yml
             - kubectl rollout status deployment/flask-app-blue
-            - kubectl get svc flask-app
   - name: 'Block #3'
     dependencies:
       - Blue
@@ -60,4 +59,3 @@ blocks:
             - kubectl apply -f deployment-green.yml
             - kubectl apply -f service-green.yml
             - kubectl rollout status deployment/flask-app-green
-            - kubectl get svc flask-app

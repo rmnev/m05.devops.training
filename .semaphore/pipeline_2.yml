@@ -1,5 +1,5 @@
 version: v1.0
-name: Canary
+name: Green version
 agent:
   machine:
     type: f1-standard-2
@@ -8,14 +8,14 @@ blocks:
   - name: "\U0001F680 Kubernetes"
     task:
       jobs:
-        - name: Canary
+        - name: Green
           commands:
             - checkout
-            - cd 3-canary-deployment
+            - cd 2-blue-green-deployment
             - kubectl config set-context --current --namespace=g4
-            - kubectl apply -f deployment-canary.yml
-            - kubectl apply -f service.yml
-            - kubectl rollout status deployment/flask-app-canary
+            - kubectl apply -f deployment-green.yml
+            - kubectl apply -f service-green.yml
+            - kubectl rollout status deployment/flask-app-green
             - kubectl get svc flask-app
       secrets:
         - name: kubeconfig

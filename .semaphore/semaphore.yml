@@ -45,7 +45,7 @@ blocks:
             - kubectl get svc flask-app
   - name: Blue
     dependencies:
-      - "\U0001F9EA Docker"
+      - "\U0001F680 Kubernetes"
     task:
       secrets:
         - name: kubeconfig

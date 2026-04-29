@@ -39,6 +39,7 @@ blocks:
             - kubectl config set-context --current --namespace=g4
             - kubectl apply -f deployment-canary.yml
             - kubectl apply -f service.yml
+            - 'kubectl get deployment flask-app-canary -o jsonpath=''{.spec.template.spec.containers[0].image}'''
             - kubectl rollout status deployment/flask-app-canary
             - kubectl get svc flask-app
       secrets:

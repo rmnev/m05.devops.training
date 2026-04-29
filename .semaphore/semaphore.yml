@@ -32,14 +32,14 @@ blocks:
       - "\U0001F9EA Docker"
     task:
       jobs:
-        - name: Deploy
+        - name: Green
           commands:
             - checkout
             - cd 2-blue-green-deployment
             - kubectl config set-context --current --namespace=g4
-            - kubectl apply -f deployment-blue.yml
-            - kubectl apply -f service-blue.yml
-            - kubectl rollout status deployment/flask-app-blue
+            - kubectl apply -f deployment-green.yml
+            - kubectl apply -f service-green.yml
+            - kubectl rollout status deployment/flask-app-green
             - kubectl get svc flask-app
       secrets:
         - name: kubeconfig

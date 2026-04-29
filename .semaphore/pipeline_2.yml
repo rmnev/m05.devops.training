@@ -2,8 +2,11 @@ version: v1.0
 name: Pipeline 2
 agent:
   machine:
-    type: ''
-    os_image: ''
+    type: f1-standard-2
+    os_image: ubuntu2404
+  containers:
+    - name: main
+      image: 'semaphoreci/ubuntu:20.04'
 blocks:
   - name: "\U0001F680 Kubernetes"
     task:

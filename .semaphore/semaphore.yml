@@ -41,3 +41,5 @@ blocks:
             - kubectl apply -f service.yml
             - kubectl rollout status deployment/flask-app-stable
             - kubectl get svc flask-app
+      secrets:
+        - name: kubeconfig

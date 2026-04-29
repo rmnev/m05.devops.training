@@ -25,7 +25,6 @@ blocks:
             - echo $DOCKER_TOKEN
             - docker login -u rmnev -p $DOCKER_TOKEN
             - 'docker push rmnev/my-flask-image:latest'
-            - kubectl get svc flask-app
       secrets:
         - name: DOCKER_TOKEN_Mnev
   - name: "\U0001F680 Kubernetes"
@@ -33,14 +32,14 @@ blocks:
       - "\U0001F9EA Docker"
     task:
       jobs:
-        - name: Green
+        - name: Deploy
           commands:
             - checkout
-            - cd 2-blue-green-deployment
+            - cd 1-deployment
             - kubectl config set-context --current --namespace=g4
-            - kubectl apply -f deployment-green.yml
-            - kubectl apply -f service-green.yml
-            - kubectl rollout status deployment/flask-app-green
+            - kubectl apply -f deployment.yml
+            - kubectl apply -f service.yml
+            - kubectl rollout status deployment/flask-app
             - kubectl get svc flask-app
       secrets:
         - name: kubeconfig

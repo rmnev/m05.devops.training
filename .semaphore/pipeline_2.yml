@@ -5,19 +5,6 @@ agent:
     type: ''
     os_image: ''
 blocks:
-  - name: "\U0001F9EA Docker"
-    task:
-      jobs:
-        - name: Create and push
-          commands:
-            - checkout
-            - cd 1-deployment
-            - 'docker build -t rmnev/my-flask-image:latest .'
-            - echo $DOCKER_TOKEN
-            - docker login -u rmnev -p $DOCKER_TOKEN
-            - 'docker push rmnev/my-flask-image:latest'
-      secrets:
-        - name: DOCKER_TOKEN_Mnev
   - name: "\U0001F680 Kubernetes"
     task:
       secrets:

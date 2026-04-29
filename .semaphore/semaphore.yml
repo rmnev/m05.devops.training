@@ -39,7 +39,7 @@ blocks:
             - kubectl config set-context --current --namespace=g4
             - kubectl apply -f deployment-canary.yml
             - kubectl apply -f service.yml
-            - kubectl scale rs -l app=flask-app-canary --replicas=0 && kubectl rollout status deployment/flask-app-canary --timeout=120s
+            - 'kubectl get deployment flask-app-canary -o jsonpath=''{.spec.selector.matchLabels}'''
             - kubectl rollout status deployment/flask-app-canary
             - kubectl get svc flask-app
       secrets:

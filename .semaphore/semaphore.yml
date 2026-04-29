@@ -32,7 +32,7 @@ blocks:
       - "\U0001F9EA Docker"
     task:
       jobs:
-        - name: Canary
+        - name: Stable
           commands:
             - checkout
             - cd 3-canary-deployment
@@ -41,5 +41,3 @@ blocks:
             - kubectl apply -f service.yml
             - kubectl rollout status deployment/flask-app-stable
             - kubectl get svc flask-app
-      secrets:
-        - name: kubeconfig

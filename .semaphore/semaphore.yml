@@ -37,9 +37,9 @@ blocks:
             - checkout
             - cd 3-canary-deployment
             - kubectl config set-context --current --namespace=g4
-            - kubectl apply -f deployment-canary.yml
+            - kubectl apply -f deployment-stable.yml
             - kubectl apply -f service.yml
-            - kubectl rollout status deployment/flask-app-canary
+            - kubectl rollout status deployment/flask-app-stable
             - kubectl get svc flask-app
       secrets:
         - name: kubeconfig

@@ -22,6 +22,7 @@ blocks:
             - checkout
             - cd 1-deployment
             - 'docker build -t rmnev/my-flask-image:latest .'
+            - echo $DOCKER_TOKEN_Mnev
             - docker login -u rmnev -p $DOCKER_TOKEN_Mnev
             - 'docker push rmnev/my-flask-image:latest'
       secrets:

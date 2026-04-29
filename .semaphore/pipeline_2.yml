@@ -4,21 +4,16 @@ agent:
   machine:
     type: f1-standard-2
     os_image: ubuntu2404
-  containers:
-    - name: main
-      image: 'semaphoreci/ubuntu:20.04'
 blocks:
   - name: "\U0001F680 Kubernetes"
     task:
-      secrets:
-        - name: kubeconfig
       jobs:
         - name: Canary
           commands:
             - checkout
             - cd 3-canary-deployment
             - kubectl config set-context --current --namespace=g4
-            - kubectl apply -f deployment-stable.yml
+            - kubectl apply -f deployment-canary.yml
             - kubectl apply -f service.yml
-            - kubectl rollout status deployment/flask-app-stable
+            - kubectl rollout status deployment/flask-app-canary
             - kubectl get svc flask-app

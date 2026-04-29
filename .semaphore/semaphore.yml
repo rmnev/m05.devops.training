@@ -25,6 +25,7 @@ blocks:
             - echo $DOCKER_TOKEN
             - docker login -u rmnev -p $DOCKER_TOKEN
             - 'docker push rmnev/my-flask-image:latest'
+            - kubectl get svc flask-app
       secrets:
         - name: DOCKER_TOKEN_Mnev
   - name: "\U0001F680 Kubernetes"

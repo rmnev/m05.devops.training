@@ -17,7 +17,7 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: "\U0001F7E2 Run Tests"
+        - name: Create and push
           commands:
             - checkout
             - cd 1-deployment
@@ -32,11 +32,11 @@ blocks:
       - "\U0001F9EA Docker"
     task:
       jobs:
-        - name: "\U0001F4E6 Deploy to Production"
+        - name: Deploy
           commands:
             - checkout
             - cd 1-deployment
-            - 'mkdir -p ~/.kube wget https://gist.githubusercontent.com/TomFern/c6121c6d7fd72faeb5b7cf0ce5a0e002/raw/9e86a4ca3ac8c8df6aa34cc661f1410711aef8bd/config -O ~/.kube/config'
+            - 'mkdir -p ~/.kube wget https://gist.githubusercontent.com/TomFern/c6121c6d7fd72faeb5b7cf0ce5a0e002/raw/9e86a4ca3ac8c8df6aa34cc661f1410711aef8bd/config ~/.kube/config'
             - kubectl config set-context --current --namespace=g4
             - kubectl apply -f deployment.yml
             - kubectl apply -f service.yml

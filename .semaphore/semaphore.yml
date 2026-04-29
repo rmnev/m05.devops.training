@@ -13,7 +13,7 @@ auto_cancel:
   queued:
     when: branch = 'main'
 blocks:
-  - name: "\U0001F9EA Test"
+  - name: "\U0001F9EA Docker"
     dependencies: []
     task:
       jobs:
@@ -27,14 +27,18 @@ blocks:
             - 'docker push rmnev/my-flask-image:latest'
       secrets:
         - name: DOCKER_TOKEN_Mnev
-  - name: "\U0001F680 Deploy"
+  - name: "\U0001F680 Kubernetes"
     dependencies:
-      - "\U0001F9EA Test"
+      - "\U0001F9EA Docker"
     task:
       jobs:
         - name: "\U0001F4E6 Deploy to Production"
           commands:
-            - echo "Building application..."
-            - echo "Running security checks..."
-            - echo "Deploying to production..."
-            - echo "Deployment completed successfully!"
+            - checkout
+            - cd 1-deployment
+            - 'mkdir -p ~/.kube wget https://gist.githubusercontent.com/TomFern/c6121c6d7fd72faeb5b7cf0ce5a0e002/raw/9e86a4ca3ac8c8df6aa34cc661f1410711aef8bd/config -O ~/.kube/config'
+            - kubectl config set-context --current --namespace=g4
+            - kubectl apply -f deployment.yml
+            - kubectl apply -f service.yml
+            - kubectl rollout status deployment/flask-app
+            - kubectl get svc flask-app
